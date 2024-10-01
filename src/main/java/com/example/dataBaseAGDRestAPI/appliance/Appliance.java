@@ -25,6 +25,10 @@ public class Appliance {
         this.item_value = item_value;
     }
 
+    public Appliance(){
+
+    }
+
     public int getId(){
         return id;
     }
