@@ -1,15 +1,8 @@
 package com.example.dataBaseAGDRestAPI.appliance;
 
-import com.example.dataBaseAGDRestAPI.Repository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
-public interface ApplianceRepository extends Repository<Appliance, Integer> {
-
-    Appliance create(Appliance appliance);
-    Appliance delete(Appliance appliance);
-    Appliance update(Appliance appliance);
-    Appliance readById(Integer id);
-    Appliance readByName(String name);
-    List<Appliance> read();
+@Repository
+public interface ApplianceRepository extends CrudRepository<Appliance, Integer> {
 }
