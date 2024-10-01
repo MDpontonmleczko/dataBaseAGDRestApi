@@ -32,7 +32,11 @@ public class ApplianceService {
         return appliances;
     }
 
-
+    public String addAppliance(String name, String description, double value){
+        Appliance appliance = new Appliance(name, description, value);
+        applianceRepository.save(appliance);
+        return "New appliance added: " + appliance.toString();
+    }
 
 
 }
