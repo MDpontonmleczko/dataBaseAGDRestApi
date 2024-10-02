@@ -43,4 +43,33 @@ public class ApplianceService {
         return "Appliance deleted: " + findById(id).toString();
     }
 
+    private boolean applianceExistsById(int id){
+        return applianceRepository.existsById(id);
+    }
+
+    public void updateNameById(int id, String name){
+        if (applianceExistsById(id)){
+            Appliance appliance = findById(id);
+            appliance.setItem(name);
+            applianceRepository.save(appliance);
+        }
+
+    }
+
+    public void updateDescriptionById(int id, String description){
+        if (applianceExistsById(id)){
+            Appliance appliance = findById(id);
+            appliance.setDescription(description);
+            applianceRepository.save(appliance);
+        }
+    }
+
+    public void updateValueById(int id, double value){
+        if (applianceExistsById(id)){
+            Appliance appliance = findById(id);
+            appliance.setItem_value(value);
+            applianceRepository.save(appliance);
+        }
+    }
+
 }
