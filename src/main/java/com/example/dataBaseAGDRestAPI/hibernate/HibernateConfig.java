@@ -48,8 +48,6 @@ public class HibernateConfig {
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://mdservice1-agd-web-store.k.aivencloud.com:25890/" +
-                "defaultdb?ssl=require&amp;user=avnadmin&amp;password=AVNS_eaaeptBBNt_tPGppazA");
 
         return dataSource;
     }
