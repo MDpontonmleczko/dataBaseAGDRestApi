@@ -38,5 +38,9 @@ public class ApplianceService {
         return "New appliance added: " + appliance.toString();
     }
 
+    public String deleteById(int id){
+        applianceRepository.deleteById(id);
+        return "Appliance deleted: " + findById(id).toString();
+    }
 
 }
