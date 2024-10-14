@@ -26,11 +26,11 @@ public class ApplianceController {
         return applianceService.findAll();
     }
 
-    @PostMapping(value = "/add/appliance/{name}/{description}/{value}")
-    public String addAppliance(@PathVariable("name") String name,
+    @PostMapping(value = "/add/appliance/{item}/{description}/{value}")
+    public String addAppliance(@PathVariable("item") String item,
                                @PathVariable("description") String description,
                                @PathVariable("value") double value){
-        return applianceService.addAppliance(name, description, value);
+        return applianceService.addAppliance(item, description, value);
     }
 
     @DeleteMapping(value = "/delete/{id}")
@@ -39,11 +39,11 @@ public class ApplianceController {
     }
 
     @PatchMapping(value = {"update/{id}/{name}/{description}/{value}",
-            "update/{id}/{name}//",
+            "update/{id}/{item}//",
             "update/{id}///{value}",
             "update/{id}//{description}/"})
     public String updateApplianceById(@PathVariable("id") int id,
-                                      @PathVariable(value = "name", required = false) String name,
+                                      @PathVariable(value = "item", required = false) String item,
                                       @PathVariable(value = "description", required = false) String description,
                                       @PathVariable(value = "value", required = false) Optional<Double> value){
 
@@ -53,8 +53,8 @@ public class ApplianceController {
                 applianceService.findById(id).getItem_value());
 
 
-        if (name != null){
-            applianceService.updateNameById(id, name);
+        if (item != null){
+            applianceService.updateNameById(id, item);
         }
         if (description != null){
             applianceService.updateDescriptionById(id, description);

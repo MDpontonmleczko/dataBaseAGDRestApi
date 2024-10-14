@@ -32,8 +32,8 @@ public class ApplianceCRUDService implements ApplianceService{
         return appliances;
     }
 
-    public String addAppliance(String name, String description, double value){
-        Appliance appliance = new Appliance(name, description, value);
+    public String addAppliance(String item, String description, double value){
+        Appliance appliance = new Appliance(item, description, value);
         applianceRepository.save(appliance);
         return "New appliance added: " + appliance.toString();
     }
@@ -43,10 +43,10 @@ public class ApplianceCRUDService implements ApplianceService{
         return "Appliance deleted: " + findById(id).toString();
     }
 
-    public void updateNameById(int id, String name){
+    public void updateNameById(int id, String item){
         if (applianceExistsById(id)){
             Appliance appliance = findById(id);
-            appliance.setItem(name);
+            appliance.setItem(item);
             applianceRepository.save(appliance);
         }
 
