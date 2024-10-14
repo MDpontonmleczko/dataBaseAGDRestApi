@@ -1,6 +1,7 @@
-package com.example.dataBaseAGDRestAPI.appliance;
+package com.example.dataBaseAGDRestAPI.rest;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.dataBaseAGDRestAPI.appliance.Appliance;
+import com.example.dataBaseAGDRestAPI.service.ApplianceService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,7 +12,6 @@ public class ApplianceController {
 
     ApplianceService applianceService;
 
-    @Autowired
     public ApplianceController(ApplianceService applianceService){
         this.applianceService = applianceService;
     }
