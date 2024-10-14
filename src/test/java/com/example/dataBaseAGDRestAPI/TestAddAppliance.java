@@ -1,7 +1,7 @@
 package com.example.dataBaseAGDRestAPI;
 
-import com.example.dataBaseAGDRestAPI.appliance.ApplianceController;
-import com.example.dataBaseAGDRestAPI.appliance.ApplianceService;
+import com.example.dataBaseAGDRestAPI.rest.ApplianceController;
+import com.example.dataBaseAGDRestAPI.service.ApplianceService;
 import io.restassured.RestAssured;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import jakarta.annotation.PostConstruct;
