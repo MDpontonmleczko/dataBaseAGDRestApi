@@ -1,6 +1,7 @@
-package com.example.dataBaseAGDRestAPI.appliance;
+package com.example.dataBaseAGDRestAPI.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.dataBaseAGDRestAPI.appliance.Appliance;
+import com.example.dataBaseAGDRestAPI.repository.ApplianceRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -8,12 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ApplianceService {
+public class ApplianceCRUDService implements ApplianceService{
 
     ApplianceRepository applianceRepository;
 
-    @Autowired
-    public ApplianceService(ApplianceRepository applianceRepository){
+    public ApplianceCRUDService(ApplianceRepository applianceRepository){
         this.applianceRepository = applianceRepository;
     }
 
@@ -43,10 +43,6 @@ public class ApplianceService {
         return "Appliance deleted: " + findById(id).toString();
     }
 
-    private boolean applianceExistsById(int id){
-        return applianceRepository.existsById(id);
-    }
-
     public void updateNameById(int id, String name){
         if (applianceExistsById(id)){
             Appliance appliance = findById(id);
@@ -72,4 +68,7 @@ public class ApplianceService {
         }
     }
 
+    private boolean applianceExistsById(int id){
+        return applianceRepository.existsById(id);
+    }
 }
