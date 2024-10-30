@@ -64,9 +64,7 @@ The `Appliance` model represents a home appliance and contains the following fie
     }`
 
 -   **Description**: Adds a new appliance to the database.
-
 -   **Responses**:
-
     -   `200 OK`: Returns the added `Appliance` object.
 
 #### 4\. Delete Appliance by ID
@@ -96,6 +94,5 @@ The `Appliance` model represents a home appliance and contains the following fie
 
 -   **Description**: Updates the data of the appliance with the specified ID.
 -   **Responses**:
-
     -   `200 OK`: Returns the updated `Appliance` object.
     -   `404 Not Found`: Appliance with the given ID does not exist.
