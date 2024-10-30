@@ -13,8 +13,6 @@ Running the Application
 
 2.  **Starting the Application**:
 
-    bash
-
     `mvn spring-boot:run`
 
 3.  **Environment Variable**: Optional settings can be configured in `application.properties`.
