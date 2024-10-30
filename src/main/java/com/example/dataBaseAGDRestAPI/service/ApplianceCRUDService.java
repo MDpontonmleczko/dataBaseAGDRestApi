@@ -19,7 +19,7 @@ public class ApplianceCRUDService implements ApplianceService{
 
     public Appliance findById(Integer id){
         Optional<Appliance> optionalAppliance = applianceRepository.findById(id);
-        return optionalAppliance.orElse(new Appliance("brak", "brak", 0));
+        return optionalAppliance.orElse(null);
     }
 
     public List<Appliance> findAll(){
@@ -32,43 +32,23 @@ public class ApplianceCRUDService implements ApplianceService{
         return appliances;
     }
 
-    public String addAppliance(String item, String description, double value){
-        Appliance appliance = new Appliance(item, description, value);
+    public Appliance addAppliance(Appliance appliance){
         applianceRepository.save(appliance);
-        return "New appliance added: " + appliance.toString();
+        return appliance;
     }
 
-    public String deleteById(int id){
+    public Appliance deleteById(int id){
+        Appliance deletedAppliance = findById(id);
         applianceRepository.deleteById(id);
-        return "Appliance deleted: " + findById(id).toString();
+        return deletedAppliance;
     }
 
-    public void updateNameById(int id, String item){
-        if (applianceExistsById(id)){
-            Appliance appliance = findById(id);
-            appliance.setItem(item);
-            applianceRepository.save(appliance);
-        }
-
-    }
-
-    public void updateDescriptionById(int id, String description){
-        if (applianceExistsById(id)){
-            Appliance appliance = findById(id);
-            appliance.setDescription(description);
-            applianceRepository.save(appliance);
-        }
-    }
-
-    public void updateValueById(int id, double value){
-        if (applianceExistsById(id)){
-            Appliance appliance = findById(id);
-            appliance.setItem_value(value);
-            applianceRepository.save(appliance);
-        }
-    }
-
-    private boolean applianceExistsById(int id){
-        return applianceRepository.existsById(id);
+    public Appliance updateApplianceById(int id, Appliance newAppliance) {
+        Appliance currentAppliance = findById(id);
+        currentAppliance.setItem(newAppliance.getItem());
+        currentAppliance.setDescription(newAppliance.getDescription());
+        currentAppliance.setItem_value(newAppliance.getItem_value());
+        applianceRepository.save(currentAppliance);
+        return findById(id);
     }
 }

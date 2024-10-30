@@ -2,10 +2,10 @@ package com.example.dataBaseAGDRestAPI.rest;
 
 import com.example.dataBaseAGDRestAPI.appliance.Appliance;
 import com.example.dataBaseAGDRestAPI.service.ApplianceService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ApplianceController {
@@ -17,50 +17,54 @@ public class ApplianceController {
     }
 
     @GetMapping(value = "/appliances/{id}")
-    public Appliance getApplianceById(@PathVariable("id") int id){
-        return applianceService.findById(id);
+    public ResponseEntity<Appliance> getApplianceById(@PathVariable("id") int id){
+
+        Appliance foundAppliance = applianceService.findById(id);
+        if (foundAppliance == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(foundAppliance);
+        }
     }
 
     @GetMapping(value = "/appliances")
-    public List<Appliance> getAllAppliances(){
-        return applianceService.findAll();
+    public ResponseEntity<List<Appliance>> getAllAppliances(){
+
+        List<Appliance> applianceList = applianceService.findAll();
+        if (applianceList.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(applianceList);
+        }
     }
 
-    @PostMapping(value = "/add/appliance/{item}/{description}/{value}")
-    public String addAppliance(@PathVariable("item") String item,
-                               @PathVariable("description") String description,
-                               @PathVariable("value") double value){
-        return applianceService.addAppliance(item, description, value);
+    @PostMapping(value = "/addAppliance")
+    public Appliance addAppliance(@RequestBody Appliance appliance) {
+
+        return applianceService.addAppliance(appliance);
     }
 
     @DeleteMapping(value = "/delete/{id}")
-    public String deleteApplianceById(@PathVariable("id") int id){
-        return applianceService.deleteById(id);
+    public ResponseEntity<Appliance> deleteApplianceById(@PathVariable("id") int id){
+
+        Appliance foundAppliance = applianceService.findById(id);
+
+        if (foundAppliance == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(applianceService.deleteById(id));
+        }
     }
 
-    @PatchMapping(value = {"update/{id}/{name}/{description}/{value}",
-            "update/{id}/{item}//",
-            "update/{id}///{value}",
-            "update/{id}//{description}/"})
-    public String updateApplianceById(@PathVariable("id") int id,
-                                      @PathVariable(value = "item", required = false) String item,
-                                      @PathVariable(value = "description", required = false) String description,
-                                      @PathVariable(value = "value", required = false) Optional<Double> value){
+    @PatchMapping(value = {"update/{id}"})
+    public ResponseEntity<Appliance> updateApplianceById(@PathVariable("id") int id, @RequestBody Appliance appliance) {
 
-        Appliance oldAppliance = new Appliance(
-                applianceService.findById(id).getItem(),
-                applianceService.findById(id).getDescription(),
-                applianceService.findById(id).getItem_value());
+        Appliance foundAppliance = applianceService.findById(id);
 
-
-        if (item != null){
-            applianceService.updateNameById(id, item);
+        if (foundAppliance == null) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(applianceService.updateApplianceById(id, appliance));
         }
-        if (description != null){
-            applianceService.updateDescriptionById(id, description);
-        }
-        value.ifPresent(doubleValue -> applianceService.updateValueById(id, doubleValue));
-
-        return "Appliance updated from: " + oldAppliance + " to: " + applianceService.findById(id);
     }
 }
